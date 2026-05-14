@@ -1,0 +1,8 @@
+#personState {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#personState > * {
+	max-width: 200px;
+}
