@@ -6,10 +6,11 @@ Sudoku made with React.
 ## Todo
 - make 9x9 grid of inputs (basic board)
 - add a settings button + overlay
-- light/dark themes, toggled with a button
-- show solution button
-- easy, medium, hard difficulties
-- tbd
+    - show solution button
+    - easy, medium, hard difficulties
+    - reset board button
+    - add timer for solving the board
+    - add option to limit the number of incorrect entries for the puzzle
 
 <br><br><br>
 
