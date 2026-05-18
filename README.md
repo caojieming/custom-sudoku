@@ -4,7 +4,10 @@ Sudoku made with React.
 <br>
 
 ## Todo
-- make 9x9 grid of inputs (basic board)
+- game logic
+    - generate initial board
+    - add a submit button
+        - check if valid solution
 - add a settings button + overlay
     - show solution button
     - easy, medium, hard difficulties

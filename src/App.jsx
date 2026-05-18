@@ -1,6 +1,6 @@
 import './styles/App.css';
 import { ThemeToggle } from './components/ThemeToggle.jsx';
-// import { PersonState } from './components/PersonState.jsx';
+import { SudokuGrid } from './components/SudokuGrid.jsx';
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
 
 			<main id='mainContent'>
 				<section>
-
+					<SudokuGrid />
 				</section>
 			</main>
 		</>
