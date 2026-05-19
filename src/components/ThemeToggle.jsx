@@ -13,10 +13,8 @@ export function ThemeToggle() {
 	}
 
 	return (
-		<div style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
-			<button onClick={toggleTheme} style={{ padding: '8px 16px', cursor: 'pointer' }}>
-				Toggle Theme
-			</button>
-		</div>
+		<button onClick={toggleTheme} style={{ padding: '8px 16px', cursor: 'pointer' }}>
+			Toggle Theme
+		</button>
 	);
 }

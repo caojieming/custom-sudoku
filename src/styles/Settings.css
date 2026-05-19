@@ -1,0 +1,50 @@
+.settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.settings-modal {
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 400px;
+    min-height: 300px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.settings-header h2 {
+    margin: 0;
+}
+
+.settings-header button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: var(--text);
+}
+
+.settings-content {
+    flex-grow: 1;
+}
