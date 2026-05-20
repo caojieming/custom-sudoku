@@ -1,6 +1,6 @@
-import '../styles/SudokuGrid.css';
+import '../styles/SudokuBoard.css';
 
-export function SudokuGrid() {
+export function SudokuBoard() {
 	// 9x9 grid
 	const cells = Array.from({ length: 81 });
 
