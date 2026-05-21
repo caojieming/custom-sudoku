@@ -26,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .sudoku-cell:focus {
@@ -39,4 +40,25 @@
 
 .border-bottom-thick {
   border-bottom: 2px solid var(--text);
+}
+
+/* specific styles for cell types */
+.sudoku-cell.initial-cell {
+  font-weight: 700;
+  background-color: var(--accent-bg);
+  user-select: none;
+  cursor: default;
+}
+
+.sudoku-cell.input-cell {
+  font-weight: 400;
+  cursor: text;
+}
+
+.sudoku-cell.input-cell:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .sudoku-cell.input-cell:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }

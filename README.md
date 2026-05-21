@@ -4,16 +4,15 @@ Sudoku made with React.
 <br>
 
 ## Todo
+- check if there are more rules for how initial board is distributed
 - game logic
-    - generate initial board
     - add a submit button
-        - check if valid solution
+        - alternatively, give all inputs colored backgrounds (blank/valid/invalid input)
 - add a settings button + overlay
     - show solution button
-    - easy, medium, hard difficulties
-    - reset board button
+    - easy, medium, hard difficulties (affecting the initial number of numbers)
     - add timer for solving the board
-    - add option to limit the number of incorrect entries for the puzzle
+- figure out how to to host this webpage
 
 <br><br><br>
 

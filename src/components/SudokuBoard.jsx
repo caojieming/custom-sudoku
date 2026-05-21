@@ -1,15 +1,12 @@
 import '../styles/SudokuBoard.css';
 
-export function SudokuBoard() {
-	// 9x9 grid
-	const cells = Array.from({ length: 81 });
-
+export function SudokuBoard({ board, onCellChange }) {
 	return (
 		<div className="sudoku-container">
 			<div className="sudoku-grid">
-				{cells.map((_, index) => {
-					const row = Math.floor(index / 9);
-					const col = index % 9;
+				{board.map((cell, idx) => {
+					const row = Math.floor(idx / 9);
+					const col = idx % 9;
 
 					// Add thicker borders to divide into 3x3 sections
 					const isRightBorder = col === 2 || col === 5;
@@ -22,13 +19,24 @@ export function SudokuBoard() {
 						className += ' border-bottom-thick';
 					}
 
-					// render as input for now, may become span later
+					if (cell.isInitial) {
+						className += ' initial-cell';
+						return (
+							<span key={idx} className={className}>
+								{cell.value}
+							</span>
+						);
+					}
+
+					className += ' input-cell';
 					return (
 						<input
-							key={index}
+							key={idx}
 							className={className}
 							type="text"
 							maxLength="1"
+							value={cell.value}
+							onChange={(e) => onCellChange(idx, e.target.value)}
 						/>
 					);
 				})}
