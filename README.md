@@ -5,9 +5,6 @@ Sudoku made with React.
 
 ## Todo
 - check if there are more rules for how initial board is distributed
-- game logic
-    - add a submit button
-        - alternatively, give all inputs colored backgrounds (blank/valid/invalid input)
 - add a settings button + overlay
     - show solution button
     - easy, medium, hard difficulties (affecting the initial number of numbers)

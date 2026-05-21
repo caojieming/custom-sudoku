@@ -42,7 +42,11 @@
   border-bottom: 2px solid var(--text);
 }
 
+
+
 /* specific styles for cell types */
+
+/* initial static cells */
 .sudoku-cell.initial-cell {
   font-weight: 700;
   background-color: var(--accent-bg);
@@ -50,15 +54,43 @@
   cursor: default;
 }
 
+/* input cells */
 .sudoku-cell.input-cell {
   font-weight: 400;
   cursor: text;
 }
 
-.sudoku-cell.input-cell:hover {
+/* input cell default bg color */
+.sudoku-cell.input-cell:not(.invalid-cell):not(.valid-cell):not(.correct-cell):hover {
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-[data-theme="dark"] .sudoku-cell.input-cell:hover {
+/* dark mode */
+[data-theme="dark"] .sudoku-cell.input-cell:not(.invalid-cell):not(.valid-cell):not(.correct-cell):hover {
   background-color: rgba(255, 255, 255, 0.03);
+}
+
+
+/* cell validation state styling */
+.sudoku-cell.input-cell.invalid-cell {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.sudoku-cell.input-cell.valid-cell {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: #b56005;
+}
+
+[data-theme="dark"] .sudoku-cell.input-cell.valid-cell {
+  color: #f59e0b;
+}
+
+.sudoku-cell.input-cell.correct-cell {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #059669;
+}
+
+[data-theme="dark"] .sudoku-cell.input-cell.correct-cell {
+  color: #34d399;
 }
