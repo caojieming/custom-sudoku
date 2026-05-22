@@ -48,3 +48,45 @@
 .settings-content {
     flex-grow: 1;
 }
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.settings-label {
+    font-weight: 500;
+    font-size: 16px;
+    font-family: var(--sans);
+}
+
+.difficulty-options {
+    display: flex;
+    gap: 8px;
+}
+
+.difficulty-btn {
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.difficulty-btn:hover {
+    background-color: var(--accent-bg);
+}
+
+.difficulty-btn.active {
+    background-color: var(--text);
+    color: var(--bg);
+    border-color: var(--border);
+    font-weight: 600;
+}

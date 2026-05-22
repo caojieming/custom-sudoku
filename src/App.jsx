@@ -6,12 +6,83 @@ import { Settings } from './components/Settings.jsx';
 import { GenerateBoard } from './components/GenerateBoard.jsx';
 
 function App() {
-	// board contents stored at top level so it can be shared with lower levels (SudokuBoard, GenerateBoard)
 	const initBoard = Array.from(
 		{ length: 81 },
 		() => ({ value: '', isInitial: false })
 	);
 	const [board, setBoard] = useState(initBoard);
+	const [difficulty, setDifficulty] = useState('medium');
+	const [fullSolution, setFullSolution] = useState(null);
+	const [clueIndices, setClueIndices] = useState([]);
+
+	// both helper and "setter" of difficulty values
+	function getClueCount(diff) {
+		if (diff === 'easy') {
+			return 40;
+		}
+		if (diff === 'medium') {
+			return 30;
+		}
+		if (diff === 'hard') {
+			return 20;
+		}
+	}
+
+	// generating a new board
+	function handleGenerate(puzzle) {
+		const { fullSolution: sol, clueIndices: indices } = puzzle;
+		setFullSolution(sol);
+		setClueIndices(indices);
+
+		const clueCount = getClueCount(difficulty);
+		const initialIndices = new Set(indices.slice(0, clueCount));
+
+		const newBoard = Array.from({ length: 81 }, (_, i) => {
+			const isInitial = initialIndices.has(i);
+			return {
+				value: isInitial ? sol[i] : '',
+				isInitial
+			};
+		});
+		setBoard(newBoard);
+	}
+
+	// difficulty setting changes, both pre- and mid-game
+	function handleDifficultyChange(newDiff) {
+		setDifficulty(newDiff);
+		if (fullSolution === null) {
+			return;
+		}
+
+		const clueCount = getClueCount(newDiff);
+		const newClues = new Set(clueIndices.slice(0, clueCount));
+
+		setBoard((prevBoard) => {
+			return prevBoard.map((cell, i) => {
+				const shouldBeClue = newClues.has(i);
+				if (shouldBeClue) {
+					// overwrite with clue when lowering difficulty, or keep existing clue
+					return {
+						value: fullSolution[i],
+						isInitial: true
+					};
+				}
+				else {
+					// if it was a clue before but is no longer a clue, clear it
+					if (cell.isInitial) {
+						return {
+							value: '',
+							isInitial: false
+						};
+					}
+					else {
+						// don't change input in non-clue cells
+						return cell;
+					}
+				}
+			});
+		});
+	}
 
 	// changing cell value/input changes board values
 	function handleCellChange(idx, value) {
@@ -31,12 +102,12 @@ function App() {
 		<>
 			<header id='header'>
 				<ThemeToggle />
-				<Settings />
+				<Settings difficulty={difficulty} onChangeDifficulty={handleDifficultyChange} />
 			</header>
 			<h1 id='title'>Sudoku</h1>
 
 			<main id='mainContent'>
-				<GenerateBoard onGenerate={setBoard} />
+				<GenerateBoard onGenerate={handleGenerate} />
 				<section>
 					<SudokuBoard board={board} onCellChange={handleCellChange} />
 				</section>

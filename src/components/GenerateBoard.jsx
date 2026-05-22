@@ -60,52 +60,38 @@ function fillGrid(grid) {
     return true;
 }
 
-// generates a random board with numCount clues
-export function generateSudoku(numCount = 20) {
+// generates a random solved board and clue indices order
+export function generateSudokuPuzzle() {
     const grid = Array.from({ length: 9 }, () => Array(9).fill(0));
     fillGrid(grid);
 
-    // convert 2D solved grid to 1D array of cell objects
-    const fullBoard = [];
+    // convert 2D solved grid to 1D array of values
+    const fullSolution = [];
     for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
-            fullBoard.push({
-                value: grid[r][c].toString(),
-                isInitial: false
-            });
+            fullSolution.push(grid[r][c].toString());
         }
     }
 
     // randomly select indices to keep as initial values
-    const indices = Array.from({ length: 81 }, (_, i) => i);
-    for (let i = indices.length - 1; i > 0; i--) {
+    const clueIndices = Array.from({ length: 81 }, (_, i) => i);
+    for (let i = clueIndices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        const temp = indices[i];
-        indices[i] = indices[j];
-        indices[j] = temp;
+        const temp = clueIndices[i];
+        clueIndices[i] = clueIndices[j];
+        clueIndices[j] = temp;
     }
 
-    const initialIndices = new Set(indices.slice(0, numCount));
-
-    return fullBoard.map((cell, idx) => {
-        if (initialIndices.has(idx)) {
-            return {
-                value: cell.value,
-                isInitial: true
-            };
-        } else {
-            return {
-                value: '',
-                isInitial: false
-            };
-        }
-    });
+    return {
+        fullSolution,
+        clueIndices
+    };
 }
 
 export function GenerateBoard({ onGenerate }) {
     const handleGenerate = () => {
-        const newBoard = generateSudoku(20);
-        onGenerate(newBoard);
+        const puzzle = generateSudokuPuzzle();
+        onGenerate(puzzle);
     };
 
     return (
