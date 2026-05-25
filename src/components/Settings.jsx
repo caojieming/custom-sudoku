@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../styles/Settings.css';
 
-export function Settings({ difficulty, onChangeDifficulty }) {
+export function Settings({ difficulty, onChangeDifficulty, onShowSolution, isGameActive }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -47,6 +47,21 @@ export function Settings({ difficulty, onChangeDifficulty }) {
                                 </div>
 
                             </div> {/* settings-row */}
+
+                            <div className="settings-row">
+                                <span className="settings-label">Show solution?</span>
+                                <button
+                                    className="settings-action-btn"
+                                    onClick={() => {
+                                        onShowSolution();
+                                        setIsOpen(false);
+                                    }}
+                                    disabled={!isGameActive}
+                                >
+                                    Show
+                                </button>
+                            </div>
+
                         </div> {/* settings-content */}
                     </div> {/* settings-modal */}
                 </div> // setings-overlay

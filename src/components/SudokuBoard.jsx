@@ -4,27 +4,27 @@ import '../styles/SudokuBoard.css';
 function getConflicts(board) {
 	const conflicts = new Set();
 	for (let i = 0; i < 81; i++) {
-		const valI = board[i].value;
+		const val1 = board[i].value;
 
 		// skip if blank cell
-		if (!valI) {
+		if (!val1) {
 			continue;
 		}
 
-		const rowI = Math.floor(i / 9);
-		const colI = i % 9;
-		const boxI = Math.floor(rowI / 3) * 3 + Math.floor(colI / 3);
+		const row1 = Math.floor(i / 9);
+		const col1 = i % 9;
+		const box1 = Math.floor(row1 / 3) * 3 + Math.floor(col1 / 3);
 
 		for (let j = i + 1; j < 81; j++) {
-			const valJ = board[j].value;
-			if (!valJ) continue;
+			const val2 = board[j].value;
+			if (!val2) continue;
 
-			if (valI === valJ) {
-				const rowJ = Math.floor(j / 9);
-				const colJ = j % 9;
-				const boxJ = Math.floor(rowJ / 3) * 3 + Math.floor(colJ / 3);
+			if (val1 === val2) {
+				const row2 = Math.floor(j / 9);
+				const col2 = j % 9;
+				const box2 = Math.floor(row2 / 3) * 3 + Math.floor(col2 / 3);
 
-				if (rowI === rowJ || colI === colJ || boxI === boxJ) {
+				if (row1 === row2 || col1 === col2 || box1 === box2) {
 					conflicts.add(i);
 					conflicts.add(j);
 				}
@@ -37,7 +37,7 @@ function getConflicts(board) {
 export function SudokuBoard({ board, onCellChange }) {
 	const conflicts = getConflicts(board);
 	const hasEmptyCells = board.some(cell => cell.value === '');
-	const isSolved = conflicts.size && !hasEmptyCells === 0;
+	const isSolved = conflicts.size === 0 && !hasEmptyCells;
 
 	return (
 		<div className="sudoku-container">
@@ -47,7 +47,7 @@ export function SudokuBoard({ board, onCellChange }) {
 					const row = Math.floor(idx / 9);
 					const col = idx % 9;
 
-					// Add thicker borders to divide into 3x3 sections
+					// add thicker borders to divide into 3x3 sections
 					const isRightBorder = col === 2 || col === 5;
 					const isBottomBorder = row === 2 || row === 5;
 					let className = 'sudoku-cell';

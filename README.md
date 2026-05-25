@@ -4,10 +4,8 @@ Sudoku made with React.
 <br>
 
 ## Todo
-- check if there are more rules for how initial board is distributed
 - add a settings button + overlay
     - show solution button
-    - easy, medium, hard difficulties (affecting the initial number of numbers)
     - add timer for solving the board
 - figure out how to to host this webpage
 

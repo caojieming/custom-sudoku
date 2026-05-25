@@ -10,9 +10,12 @@ function App() {
 		{ length: 81 },
 		() => ({ value: '', isInitial: false })
 	);
+	// 1d array (81 cells) of current board
 	const [board, setBoard] = useState(initBoard);
 	const [difficulty, setDifficulty] = useState('medium');
+	// 1d array (81 cells) of solution values
 	const [fullSolution, setFullSolution] = useState(null);
+	// indices in fullSolution
 	const [clueIndices, setClueIndices] = useState([]);
 
 	// both helper and "setter" of difficulty values
@@ -98,11 +101,30 @@ function App() {
 		});
 	}
 
+	// fill all inputs with solution values
+	function handleShowSolution() {
+		if (fullSolution === null) return;
+		setBoard((prevBoard) => {
+			return prevBoard.map((cell, i) => {
+				if (cell.isInitial) return cell;
+				return {
+					...cell,
+					value: fullSolution[i]
+				};
+			});
+		});
+	}
+
 	return (
 		<>
 			<header id='header'>
 				<ThemeToggle />
-				<Settings difficulty={difficulty} onChangeDifficulty={handleDifficultyChange} />
+				<Settings
+					difficulty={difficulty}
+					onChangeDifficulty={handleDifficultyChange}
+					onShowSolution={handleShowSolution}
+					isGameActive={fullSolution !== null}
+				/>
 			</header>
 			<h1 id='title'>Sudoku</h1>
 

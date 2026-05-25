@@ -90,3 +90,26 @@
     border-color: var(--border);
     font-weight: 600;
 }
+
+.settings-action-btn {
+    background-color: var(--text);
+    color: var(--bg);
+    border: 1px solid var(--border);
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.settings-action-btn:hover:not(:disabled) {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.settings-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
