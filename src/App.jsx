@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import './styles/App.css';
 import { ThemeToggle } from './components/ThemeToggle.jsx';
-import { SudokuBoard } from './components/SudokuBoard.jsx';
+import { SudokuBoard, getConflicts } from './components/SudokuBoard.jsx';
 import { Settings } from './components/Settings.jsx';
 import { GenerateBoard } from './components/GenerateBoard.jsx';
+import { Timer } from './components/Timer.jsx';
 
 function App() {
 	const initBoard = Array.from(
@@ -115,16 +116,25 @@ function App() {
 		});
 	}
 
+	// logic to determine if the timer should be running
+	const conflicts = getConflicts(board);
+	const hasEmptyCells = board.some(cell => cell.value === '');
+	const isSolved = fullSolution !== null && conflicts.size === 0 && !hasEmptyCells;
+	const isTimerRunning = fullSolution !== null && !isSolved;
+
 	return (
 		<>
 			<header id='header'>
-				<ThemeToggle />
-				<Settings
-					difficulty={difficulty}
-					onChangeDifficulty={handleDifficultyChange}
-					onShowSolution={handleShowSolution}
-					isGameActive={fullSolution !== null}
-				/>
+				<Timer isRunning={isTimerRunning} resetKey={fullSolution} />
+				<div className="header-right">
+					<ThemeToggle />
+					<Settings
+						difficulty={difficulty}
+						onChangeDifficulty={handleDifficultyChange}
+						onShowSolution={handleShowSolution}
+						isGameActive={fullSolution !== null}
+					/>
+				</div>
 			</header>
 			<h1 id='title'>Sudoku</h1>
 

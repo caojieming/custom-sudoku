@@ -1,7 +1,7 @@
 import '../styles/SudokuBoard.css';
 
 // gets and returns 1d index of cells with conflicts
-function getConflicts(board) {
+export function getConflicts(board) {
 	const conflicts = new Set();
 	for (let i = 0; i < 81; i++) {
 		const val1 = board[i].value;

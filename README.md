@@ -4,9 +4,6 @@ Sudoku made with React.
 <br>
 
 ## Todo
-- add a settings button + overlay
-    - show solution button
-    - add timer for solving the board
 - figure out how to to host this webpage
 
 <br><br><br>
