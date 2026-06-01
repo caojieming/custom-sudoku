@@ -88,7 +88,7 @@ export function generateSudokuPuzzle() {
     };
 }
 
-export function GenerateBoard({ onGenerate }) {
+export function GenerateBoard({ onGenerate, onClearInputs }) {
     const handleGenerate = () => {
         const puzzle = generateSudokuPuzzle();
         onGenerate(puzzle);
@@ -98,6 +98,9 @@ export function GenerateBoard({ onGenerate }) {
         <div className="generate-container">
             <button className="generate-btn" onClick={handleGenerate}>
                 Generate Board
+            </button>
+            <button className="clear-input-btn" onClick={onClearInputs}>
+                Clear Inputs
             </button>
         </div>
     );

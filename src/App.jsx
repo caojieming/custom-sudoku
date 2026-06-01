@@ -9,7 +9,7 @@ import { Timer } from './components/Timer.jsx';
 function App() {
 	const initBoard = Array.from(
 		{ length: 81 },
-		() => ({ value: '', isInitial: false })
+		() => ({ value: '', isClue: false })
 	);
 	// 1d array (81 cells) of current board
 	const [board, setBoard] = useState(initBoard);
@@ -42,10 +42,10 @@ function App() {
 		const initialIndices = new Set(indices.slice(0, clueCount));
 
 		const newBoard = Array.from({ length: 81 }, (_, i) => {
-			const isInitial = initialIndices.has(i);
+			const isClue = initialIndices.has(i);
 			return {
-				value: isInitial ? sol[i] : '',
-				isInitial
+				value: isClue ? sol[i] : '',
+				isClue
 			};
 		});
 		setBoard(newBoard);
@@ -68,15 +68,15 @@ function App() {
 					// overwrite with clue when lowering difficulty, or keep existing clue
 					return {
 						value: fullSolution[i],
-						isInitial: true
+						isClue: true
 					};
 				}
 				else {
 					// if it was a clue before but is no longer a clue, clear it
-					if (cell.isInitial) {
+					if (cell.isClue) {
 						return {
 							value: '',
-							isInitial: false
+							isClue: false
 						};
 					}
 					else {
@@ -91,11 +91,12 @@ function App() {
 	// changing cell value/input changes board values
 	function handleCellChange(idx, value) {
 		// only allow empty string or numbers 1-9
-		if (value !== '' && !/^[1-9]$/.test(value)) return;
-
+		if (value !== '' && !/^[1-9]$/.test(value)) {
+			return;
+		}
 		setBoard((prevBoard) => {
 			const newBoard = [...prevBoard];
-			if (!newBoard[idx].isInitial) {
+			if (!newBoard[idx].isClue) {
 				newBoard[idx] = { ...newBoard[idx], value };
 			}
 			return newBoard;
@@ -104,14 +105,30 @@ function App() {
 
 	// fill all inputs with solution values
 	function handleShowSolution() {
-		if (fullSolution === null) return;
+		if (fullSolution === null) {
+			return;
+		}
 		setBoard((prevBoard) => {
 			return prevBoard.map((cell, i) => {
-				if (cell.isInitial) return cell;
+				if (cell.isClue) {
+					return cell;
+				}
 				return {
 					...cell,
 					value: fullSolution[i]
 				};
+			});
+		});
+	}
+
+	// clear all player input cells
+	function handleClearInputs() {
+		setBoard((prevBoard) => {
+			return prevBoard.map((cell) => {
+				if (cell.isClue) {
+					return cell;
+				}
+				return { ...cell, value: '' };
 			});
 		});
 	}
@@ -139,7 +156,7 @@ function App() {
 			<h1 id='title'>Sudoku</h1>
 
 			<main id='mainContent'>
-				<GenerateBoard onGenerate={handleGenerate} />
+				<GenerateBoard onGenerate={handleGenerate} onClearInputs={handleClearInputs} />
 				<section>
 					<SudokuBoard board={board} onCellChange={handleCellChange} />
 				</section>

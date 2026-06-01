@@ -58,7 +58,7 @@ export function SudokuBoard({ board, onCellChange }) {
 						className += ' border-bottom-thick';
 					}
 
-					if (cell.isInitial) {
+					if (cell.isClue) {
 						className += ' initial-cell';
 						return (
 							<span key={idx} className={className}>

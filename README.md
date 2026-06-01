@@ -4,7 +4,10 @@ Sudoku made with React.
 <br>
 
 ## Todo
-- figure out how to to host this webpage
+- add a clear inputs button
+- add a clear board button
+- add a method to pause and resume the timer
+    - maybe completely decouple the timer from generate board and solving board
 
 <br><br><br>
 

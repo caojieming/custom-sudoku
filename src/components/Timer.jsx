@@ -11,7 +11,9 @@ export function Timer({ isRunning, resetKey }) {
 
     // track elapsed time when active
     useEffect(() => {
-        if (!isRunning) return;
+        if (!isRunning) {
+            return;
+        }
 
         const interval = setInterval(() => {
             setSeconds(prev => prev + 1);
