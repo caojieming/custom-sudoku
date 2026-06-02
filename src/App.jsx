@@ -3,7 +3,7 @@ import './styles/App.css';
 import { ThemeToggle } from './components/ThemeToggle.jsx';
 import { SudokuBoard, getConflicts } from './components/SudokuBoard.jsx';
 import { Settings } from './components/Settings.jsx';
-import { GenerateBoard } from './components/GenerateBoard.jsx';
+import { MainButtons } from './components/MainButtons.jsx';
 import { Timer } from './components/Timer.jsx';
 
 function App() {
@@ -133,6 +133,13 @@ function App() {
 		});
 	}
 
+	// clear entire board and reset state
+	function handleClearBoard() {
+		setBoard(initBoard);
+		setFullSolution(null);
+		setClueIndices([]);
+	}
+
 	// logic to determine if the timer should be running
 	const conflicts = getConflicts(board);
 	const hasEmptyCells = board.some(cell => cell.value === '');
@@ -156,7 +163,7 @@ function App() {
 			<h1 id='title'>Sudoku</h1>
 
 			<main id='mainContent'>
-				<GenerateBoard onGenerate={handleGenerate} onClearInputs={handleClearInputs} />
+				<MainButtons onGenerate={handleGenerate} onClearInputs={handleClearInputs} onClearBoard={handleClearBoard} />
 				<section>
 					<SudokuBoard board={board} onCellChange={handleCellChange} />
 				</section>

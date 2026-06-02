@@ -36,7 +36,8 @@
   transform: translateY(0);
 }
 
-.clear-input-btn {
+.clear-inputs-btn,
+.clear-board-btn {
   background: var(--bg);
   color: var(--text);
   border: 2px solid var(--border);
@@ -50,17 +51,20 @@
   letter-spacing: 0.5px;
 }
 
-.clear-input-btn:hover {
+.clear-inputs-btn:hover,
+.clear-board-btn:hover {
   background: var(--text);
   color: var(--bg);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="dark"] .clear-input-btn:hover {
+[data-theme="dark"] .clear-inputs-btn:hover,
+[data-theme="dark"] .clear-board-btn:hover {
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
 }
 
-.clear-input-btn:active {
+.clear-inputs-btn:active,
+.clear-board-btn:active {
   transform: translateY(0);
 }

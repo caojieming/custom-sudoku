@@ -1,4 +1,4 @@
-import '../styles/GenerateBoard.css';
+import '../styles/MainButtons.css';
 
 // check if placing num at (row, col) is valid
 function isValid(grid, row, col, num) {
@@ -88,7 +88,7 @@ export function generateSudokuPuzzle() {
     };
 }
 
-export function GenerateBoard({ onGenerate, onClearInputs }) {
+export function MainButtons({ onGenerate, onClearInputs, onClearBoard }) {
     const handleGenerate = () => {
         const puzzle = generateSudokuPuzzle();
         onGenerate(puzzle);
@@ -99,8 +99,11 @@ export function GenerateBoard({ onGenerate, onClearInputs }) {
             <button className="generate-btn" onClick={handleGenerate}>
                 Generate Board
             </button>
-            <button className="clear-input-btn" onClick={onClearInputs}>
+            <button className="clear-inputs-btn" onClick={onClearInputs}>
                 Clear Inputs
+            </button>
+            <button className="clear-board-btn" onClick={onClearBoard}>
+                Clear All
             </button>
         </div>
     );
