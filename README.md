@@ -4,8 +4,7 @@ Sudoku made with React.
 <br>
 
 ## Todo
-- add a method to pause and resume the timer
-    - maybe completely decouple the timer from generate board and solving board
+- 
 
 <br><br><br>
 
